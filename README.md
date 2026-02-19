@@ -1,6 +1,6 @@
-To download an append to AGENTS.md
+To download and append
 
 ```
 curl -o DEFINITIONS.md https://raw.githubusercontent.com/tearne/agents/main/DEFINITIONS.md
-printf '\n\n# Definitions\n@DEFINITIONS.md\n' >> AGENTS.md
+printf '\n\n# Definitions\n@DEFINITIONS.md\n' >> CLAUDE.md
 ```
