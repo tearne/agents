@@ -18,7 +18,18 @@ A specification will typically follow a structure such as:
 ## Verification
 ```
 
-All changes to `SPEC.md` files must follow this process:
+All changes to `SPEC.md` files must follow this four-phase process:
+
+| Phase | Action | Output |
+|-------|--------|--------|
+| **1. Propose** | Define intent and scope of the change | `changes/<change-name>/proposal.md` |
+| **2. Design** | Plan the technical approach and ordered task list | `changes/<change-name>/design.md` |
+| **3. Implement** | Execute tasks one at a time, pausing for review after each | Updated code/tests |
+| **4. Archive** | Apply the proposal delta to `SPEC.md`; move the change folder to `changes/archive/` | Updated `SPEC.md` |
+
+Each phase requires explicit approval before the next begins.
+
+> **Getting started**: When setting up a new project, create the initial `SPEC.md` directly. Once it is in place, use this process with the change name `initial-implementation` to design and carry out the first implementation.
 
 > **Phase transitions**: Announce each move between phases clearly (e.g. "Proposal is ready for review", "Design is ready for review", "Implementation complete — ready to archive"). Do not proceed to the next phase without explicit approval.
 
