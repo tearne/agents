@@ -34,7 +34,7 @@ Each phase requires explicit approval before the next begins.
 > **Phase transitions**: Announce each move between phases clearly (e.g. "Proposal is ready for review", "Design is ready for review", "Implementation complete — ready to archive"). Do not proceed to the next phase without explicit approval.
 
 ### 1. Propose
-Create a `proposal.md` in the `changes/<change-name>/` directory.
+Create a `proposal.md` in the `changes/<change-name>/` directory. Do not include a date in the folder name — dates are added only when archiving.
 
 ```markdown
 # Proposal: <Change Name>
