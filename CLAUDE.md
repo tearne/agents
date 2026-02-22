@@ -1,2 +1,0 @@
-@PROCESS.md
-@POS.md

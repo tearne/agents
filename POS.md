@@ -27,7 +27,7 @@ POS guidance:
     if __name__ == "__main__":
         if not os.environ.get("VIRTUAL_ENV"):
             print("Error: no virtual environment detected. Run this script via './<script-name>' (requires uv), or activate a virtual environment first.")
-            sys.exit(1)
+            sys.exit(100)
         main()
     ```
 - Prefer built-in libraries to maximise future compatibility. Suggested (when relevant): `argparse`, `getpass`, `os`, `pathlib`, `shutil`, `subprocess`, `sys`, `time`. Pre-approved external: `rich`. Other third-party libraries may be proposed if they are mainstream or would significantly enhance readability.
