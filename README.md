@@ -1,8 +1,6 @@
-Clone this repo into a subdirectory of `~/.claude/`, then run the setup script. It will write `~/.claude/CLAUDE.md` with references pointing to the correct files in the repo, backing up any existing `CLAUDE.md` first.
+Clone this repo anywhere, then run the setup script. It will symlink `~/.claude/CLAUDE.md` to the repo's `CLAUDE.md`, backing up any existing `CLAUDE.md` first.
 
 ```sh
-git clone https://github.com/tearne/agents ~/.claude/agents
-cd ~/.claude/agents && ./setup.py
+git clone https://github.com/tearne/agents ~/agents
+~/agents/setup.py
 ```
-
-The repo can be cloned into any subdirectory name under `~/.claude/` — the setup script detects its own location and writes the correct paths.
