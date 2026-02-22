@@ -5,8 +5,7 @@
 Project specifications are contained in `SPEC.md` files:
 - The **root** `SPEC.md` covers the project as a whole (structure, shared requirements, integration testing).
 - During spec changes, relevant assets such as proposals are stored in subfolders of the `changes` directory, which is placed alongside the relevant `SPEC.md`.
-- Directory `SPEC.md` files are scoped to components in that directory and below — they own their own usage, implementation, and test definitions.
-- Directory specs inherit project-wide non-functional requirements unless they explicitly override them.
+- Directory `SPEC.md` files are scoped to components in that directory and below, inheriting project-wide non-functional requirements unless explicitly overridden.
 
 A specification will typically follow a structure such as:
 ```markdown
@@ -34,7 +33,7 @@ Each phase requires explicit approval before the next begins.
 > **Phase transitions**: Announce each move between phases clearly (e.g. "Proposal is ready for review", "Design is ready for review", "Implementation complete — ready to archive"). Do not proceed to the next phase without explicit approval.
 
 ### 1. Propose
-Create a `proposal.md` in the `changes/<change-name>/` directory. Do not include a date in the folder name — dates are added only when archiving.
+Create a `proposal.md` in the `changes/<change-name>/` directory.
 
 ```markdown
 # Proposal: <Change Name>
@@ -66,10 +65,8 @@ Omit delta sections which aren't relevant.
 
 > **Notes**: A proposal with `Status: Note` is a deliberately minimal capture — a brief `Intent` and an `Unresolved` section are all that is required. Notes are parked intentionally and should not be treated as stalled drafts. They are picked up and elaborated into full proposals when the time is right; no other phases of the process apply until then.
 
-The proposal must be reviewed and approved before proceeding.
-
 ### 2. Design
-Create a `design.md` in the same change folder as the proposal. This captures the technical approach and an ordered task list. The design should explain *how* the approved spec changes will be realised in the codebase — this is where implementation-specific detail belongs (not in the proposal or spec).
+Create a `design.md` in the same change folder as the proposal. It should explain *how* the approved spec changes will be realised and include an ordered task list — implementation-specific detail belongs here, not in the proposal or spec.
 
 ```markdown
 # Design: <Change Name>
@@ -87,8 +84,6 @@ referencing relevant code, libraries, and patterns.
 ```
 
 Where the task list includes tests, they should be listed as separate tasks and, where possible, written before the code they verify (TDD style).
-
-The design must be reviewed and approved before implementation begins.
 
 ### 3. Implement
 Work through the task list one item at a time. Check off each task in `design.md` as it is completed. Pause after each task and invite the operator to review before proceeding to the next. Do not modify `SPEC.md` during this phase.
