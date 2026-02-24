@@ -77,16 +77,16 @@ Technical explanation of how the change will be implemented,
 referencing relevant code, libraries, and patterns.
 
 ## Tasks
-1. [ ] <implementation task>
-2. [ ] <implementation task>
-3. [ ] Run tests / verify
-4. [ ] Confirm implementation complete and ready to archive
+1. <implementation task>
+2. <implementation task>
+3. Run tests / verify
+4. Confirm implementation complete and ready to archive
 ```
 
 Where the task list includes tests, they should be listed as separate tasks and, where possible, written before the code they verify (TDD style).
 
 ### 3. Implement
-Work through the task list one item at a time. Check off each task in `design.md` as it is completed, referencing it by number (e.g. "Task 1 complete"). Pause after each task and invite the operator to review before proceeding to the next. Do not modify `SPEC.md` during this phase.
+Work through the task list one item at a time. Mark each task complete in `design.md` by striking through the text as it is completed, referencing it by number (e.g. "Task 1 complete"). Pause after each task and invite the operator to review before proceeding to the next. Do not modify `SPEC.md` during this phase.
 
 ### 4. Archive
 Apply the proposal delta to the `SPEC.md` alongside the `changes/` directory. Move the change folder to `changes/archive/YYYY-MM-DD-<change-name>/`.
