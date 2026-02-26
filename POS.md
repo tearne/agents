@@ -30,4 +30,10 @@ POS guidance:
             sys.exit(100)
         main()
     ```
-- Prefer built-in libraries to maximise future compatibility. Suggested (when relevant): `argparse`, `getpass`, `os`, `pathlib`, `shutil`, `subprocess`, `sys`, `time`. Pre-approved external: `rich`. Other third-party libraries may be proposed if they are mainstream or would significantly enhance readability.
+- Prefer built-in libraries to maximise future compatibility. Suggested (when relevant): `argparse`, `atexit`, `getpass`, `os`, `pathlib`, `shutil`, `subprocess`, `sys`, `time`. Pre-approved external: `rich`. Other third-party libraries may be proposed if they are mainstream or would significantly enhance readability.
+- When a `Path` object is already in hand, prefer `path.open(mode)` over `open(path, mode)` to keep pathlib usage consistent and avoid mixing idioms within the same file.
+- Use `atexit` for cleanup of resources that must be released on normal exit and on `sys.exit()` (e.g. a log file opened at startup). Note: `atexit` handlers do not run on `os._exit()` or unhandled signals such as `SIGKILL`.
+    ```py
+    log = log_path.open("w")
+    atexit.register(log.close)
+    ```
