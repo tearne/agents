@@ -37,3 +37,38 @@ POS guidance:
     log = log_path.open("w")
     atexit.register(log.close)
     ```
+
+## Testing
+
+Tests can be included in the same file using pytest with an inline dependency and self-executing main guard:
+
+```py
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = "==3.12.*"
+# dependencies = ["pytest"]
+# ///
+
+import pathlib
+import sys
+from unittest.mock import patch
+
+import pytest
+
+@pytest.fixture
+def temp_home(tmp_path):
+    with patch("pathlib.Path.home", return_value=tmp_path):
+        yield tmp_path
+
+def test_example(temp_home):
+    assert temp_home.exists()
+
+if __name__ == "__main__":
+    if "pytest" not in sys.modules or "pytest.pytest_source" not in dir():
+        sys.exit(pytest.main([__file__, "-v"]))
+```
+
+Key points:
+- The `dependencies` in the script header ensures pytest is available when run via `./test_file.py`
+- The main guard uses a simple check to avoid nesting pytest when collected by an external pytest run
+- Tests can be run via `./test_file.py` (uses uv to run) or `uv run --with pytest pytest test_file.py`

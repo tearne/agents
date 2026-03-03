@@ -17,23 +17,23 @@ A specification will typically follow a structure such as:
 ## Verification
 ```
 
-All changes to `SPEC.md` files must follow this four-phase process:
+Changes to `SPEC.md` files must follow the four-phase process detailed below.
 
 | Phase | Action | Output |
 |-------|--------|--------|
-| **1. Propose** | Define intent and scope of the change | `changes/<change-name>/proposal.md` |
-| **2. Design** | Plan the technical approach and ordered task list | `changes/<change-name>/design.md` |
+| **1. Propose** | Define intent and scope | `changes/<change-name>/proposal.md` |
+| **2. Design** | Plan the technical approach and tasks | `changes/<change-name>/design.md` |
 | **3. Implement** | Execute tasks one at a time, pausing for review after each | Updated code/tests |
 | **4. Archive** | Apply the proposal delta to `SPEC.md`; move the change folder to `changes/archive/` | Updated `SPEC.md` |
 
-Each phase requires explicit approval before the next begins.
+Each phase requires the user to be prompted to review and approve before the next begins.
 
 > **Getting started**: When setting up a new project, create the initial `SPEC.md` directly. Once it is in place, use this process with the change name `initial-implementation` to design and carry out the first implementation.
 
 > **Phase transitions**: Announce each move between phases clearly (e.g. "Proposal is ready for review", "Design is ready for review", "Implementation complete — ready to archive"). Do not proceed to the next phase without explicit approval.
 
 ### 1. Propose
-Create a `proposal.md` in the `changes/<change-name>/` directory.
+Create a `proposal.md` in the `changes/open/<change-name>/` directory.
 
 ```markdown
 # Proposal: <Change Name>
@@ -50,7 +50,7 @@ Why this change is needed.
 - **In scope**: what this change covers
 - **Out of scope**: what is deferred
 
-## Delta
+## Specification Deltas
 Omit delta sections which aren't relevant.
 
 ### ADDED
@@ -77,16 +77,17 @@ Technical explanation of how the change will be implemented,
 referencing relevant code, libraries, and patterns.
 
 ## Tasks
-1. <implementation task>
-2. <implementation task>
-3. Run tests / verify
-4. Confirm implementation complete and ready to archive
+Tasks should clearly indicate the asset they will work on.  e.g.  "Spec", "Tests", Implement", "Verify", "Process"
+1. Tests: <testing task>
+2. Impl: <implementation task>
+3. Verify: <verification task>
+4. Process: <confirm ready to archive>
 ```
 
-Where the task list includes tests, they should be listed as separate tasks and, where possible, written before the code they verify (TDD style).
+Where possible, tests should be listed as separate items, written first, verified to fail (TDD style).
 
 ### 3. Implement
-Work through the task list one item at a time. Mark each task complete in `design.md` by striking through the text as it is completed, referencing it by number (e.g. "Task 1 complete"). Pause after each task and invite the operator to review before proceeding to the next. Do not modify `SPEC.md` during this phase.
+Work through the task list one item at a time. Mark each task complete with a tick (`✓`) in `design.md` as it is completed. Pause after each task, referencing it by number, and invite the operator to review before proceeding to the next (e.g. "Task 1 ready for review"). Do not modify `SPEC.md` during this phase.
 
 ### 4. Archive
 Apply the proposal delta to the `SPEC.md` alongside the `changes/` directory. Move the change folder to `changes/archive/YYYY-MM-DD-<change-name>/`.

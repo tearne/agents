@@ -3,8 +3,8 @@
 # requires-python = "==3.12.*"
 # ///
 
-import json
 import os
+import shutil
 import sys
 import pathlib
 import subprocess
@@ -34,25 +34,23 @@ def setup():
 
 
 def is_claude_installed():
-    return pathlib.Path.home() / ".claude" / "CLAUDE.md"
+    return shutil.which("claude") is not None
 
 
 def is_opencode_installed():
-    return pathlib.Path.home() / ".config" / "opencode"
+    return shutil.which("opencode") is not None
 
 
 def setup_claude(repo_dir):
-    claude_md = pathlib.Path.home() / ".claude" / "CLAUDE.md"
+    claude_dir = pathlib.Path.home() / ".claude"
+    claude_dir.mkdir(parents=True, exist_ok=True)
+    claude_md = claude_dir / "CLAUDE.md"
     content = f"""\
 @{repo_dir}/PROCESS.md
 @{repo_dir}/POS.md
 """
 
-    if (
-        claude_md.exists()
-        and not claude_md.is_symlink()
-        and claude_md.read_text() == content
-    ):
+    if claude_md.exists() and claude_md.read_text() == content:
         print(f"{claude_md} already contains the correct content.")
         return
 
@@ -68,35 +66,34 @@ def setup_claude(repo_dir):
 
 def setup_opencode(repo_dir):
     config_dir = pathlib.Path.home() / ".config" / "opencode"
-    config_file = config_dir / "opencode.json"
+    agents_md = config_dir / "AGENTS.md"
 
     config_dir.mkdir(parents=True, exist_ok=True)
 
-    instructions = [str(repo_dir / "PROCESS.md"), str(repo_dir / "POS.md")]
+    content = f"""\
+@{repo_dir}/PROCESS.md
+@{repo_dir}/POS.md
+"""
 
-    existing_config = {}
-    if config_file.exists():
-        try:
-            existing_config = json.loads(config_file.read_text())
-        except json.JSONDecodeError:
-            pass
-
-    new_config = {**existing_config, "instructions": instructions}
-
-    if existing_config.get("instructions") == instructions:
-        print(f"{config_file} already contains the correct instructions.")
+    if agents_md.exists() and agents_md.read_text() == content:
+        print(f"{agents_md} already contains the correct content.")
         return
 
-    backup_if_exists(config_file)
-    config_file.write_text(json.dumps(new_config, indent=2) + "\n")
-    print(f"Wrote {config_file}")
+    backed_up = backup_if_exists(agents_md)
+    agents_md.unlink(missing_ok=True)
+    agents_md.write_text(content)
+    print(f"Wrote {agents_md}")
+    if backed_up:
+        print(
+            "Warning: a pre-existing AGENTS.md was backed up — review it to check for content that should be preserved."
+        )
 
 
 # --- utilities ---
 
 
 def backup_if_exists(path):
-    if path.exists() or path.is_symlink():
+    if path.exists():
         backup = (
             path.parent
             / f"{path.stem}.bak.{datetime.now().strftime('%Y%m%d%H%M%S')}{path.suffix}"
