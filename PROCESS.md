@@ -46,10 +46,6 @@ Create a `proposal.md` in the `changes/open/<change-name>/` directory. A proposa
 ## Intent
 Why this change is needed.
 
-## Scope
-- **In scope**: what this change covers
-- **Out of scope**: what is deferred
-
 ## Specification Deltas
 Omit delta sections which aren't relevant.
 
@@ -61,9 +57,13 @@ Omit delta sections which aren't relevant.
 
 ### REMOVED
 - Requirements being eliminated
+
+## Scope (optional)
+- **Out of scope**: what is deferred
+- **In scope**: what this change covers
 ```
 
-> **Notes**: Notes are parked intentionally and should not be treated as stalled drafts. They are picked up and elaborated into full proposals when the time is right; no other phases of the process apply until then.
+> **Behaviour over implementation**: Intent is often expressed in technical or implementation terms — that is fine for Notes and drafts. Before a proposal is finalised, guide the user towards expressing required behaviours instead. Reserve technical specification for genuine constraints or non-functional requirements.
 
 ### 2. Design
 Create a `design.md` in the same change folder as the proposal. It should explain *how* the approved spec changes will be realised and include an ordered task list — implementation-specific detail belongs here, not in the proposal or spec.
