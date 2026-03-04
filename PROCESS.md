@@ -33,7 +33,7 @@ Each phase requires the user to be prompted to review and approve before the nex
 > **Phase transitions**: Announce each move between phases clearly (e.g. "Proposal is ready for review", "Design is ready for review", "Implementation complete — ready to archive"). Do not proceed to the next phase without explicit approval.
 
 ### 1. Propose
-Create a `proposal.md` in the `changes/open/<change-name>/` directory.
+Create a `proposal.md` in the `changes/open/<change-name>/` directory. A proposal with `Status: Note` is freeform — jot down thoughts and discussion without any required structure. The template below applies from `Draft` onwards.
 
 ```markdown
 # Proposal: <Change Name>
@@ -63,7 +63,7 @@ Omit delta sections which aren't relevant.
 - Requirements being eliminated
 ```
 
-> **Notes**: A proposal with `Status: Note` is a deliberately minimal capture — a brief `Intent` and an `Unresolved` section are all that is required. Notes are parked intentionally and should not be treated as stalled drafts. They are picked up and elaborated into full proposals when the time is right; no other phases of the process apply until then.
+> **Notes**: Notes are parked intentionally and should not be treated as stalled drafts. They are picked up and elaborated into full proposals when the time is right; no other phases of the process apply until then.
 
 ### 2. Design
 Create a `design.md` in the same change folder as the proposal. It should explain *how* the approved spec changes will be realised and include an ordered task list — implementation-specific detail belongs here, not in the proposal or spec.
