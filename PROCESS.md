@@ -37,7 +37,7 @@ Create a `proposal.md` in the `changes/open/<change-name>/` directory. A proposa
 
 ```markdown
 # Proposal: <Change Name>
-**Status: Note | Draft | Ready for Review | Approved**
+**Status: Note | Draft | Approved**
 
 ## Unresolved (optional)
 - Items not yet fully specified
@@ -70,7 +70,7 @@ Create a `design.md` in the same change folder as the proposal. It should explai
 
 ```markdown
 # Design: <Change Name>
-**Status: Draft | Ready for Review | Approved**
+**Status: Draft | Approved**
 
 ## Approach
 Technical explanation of how the change will be implemented,
@@ -91,4 +91,9 @@ Work through the task list one item at a time. Mark each task complete with a ti
 
 ### 4. Archive
 Apply the proposal delta to the `SPEC.md` alongside the `changes/` directory. Move the change folder to `changes/archive/YYYY-MM-DD-<change-name>/`.
+
+Before archiving, ensure the change folder is complete:
+- **No proposal**: prompt the user to retrospectively capture intent in a `proposal.md` before proceeding
+- **No design, or no formal design phase followed**: create a minimal `design.md` describing what was done, marked `*(retrospective)*`
+- **Proposal not marked Approved**: if the change was approved, update the status to `Approved`; otherwise flag to the user before proceeding
 

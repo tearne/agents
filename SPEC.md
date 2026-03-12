@@ -11,6 +11,12 @@ cd ~/path/to/agents && ./setup.py
 
 The repo may be cloned anywhere. After setup, both Claude Code and OpenCode will load the configurations automatically in every project.
 
+## Configuration Files
+- `BEHAVIOUR.md` — general agent behaviour rules (e.g. no unsolicited git writes)
+- `PROCESS.md` — change management process
+- `POS.md` — Python Orchestrated Script style guide
+- `STYLE.md` — language-agnostic coding style guide (readable abstraction layers)
+
 ## Behaviour
 - `setup.py` determines its own absolute location
 - Detects whether Claude Code is installed by checking for the `claude` CLI via `shutil.which("claude")`
@@ -20,12 +26,12 @@ The repo may be cloned anywhere. After setup, both Claude Code and OpenCode will
 - For Claude Code:
   - Creates `~/.claude/` directory if it doesn't exist
   - If `~/.claude/CLAUDE.md` already exists, it is backed up with a timestamped filename before being overwritten
-  - Writes `~/.claude/CLAUDE.md` containing `@`-references to `PROCESS.md` and `POS.md` using absolute paths
+  - Writes `~/.claude/CLAUDE.md` containing `@`-references to `BEHAVIOUR.md`, `PROCESS.md`, `POS.md`, and `STYLE.md` using absolute paths
   - Claude Code loads `~/.claude/CLAUDE.md` globally
 - For OpenCode:
   - Creates `~/.config/opencode/` if it doesn't exist
   - If `~/.config/opencode/AGENTS.md` already exists, it is backed up with a timestamped filename before being overwritten
-  - Writes `~/.config/opencode/AGENTS.md` containing `@`-references to `PROCESS.md` and `POS.md` using absolute paths
+  - Writes `~/.config/opencode/AGENTS.md` containing `@`-references to `BEHAVIOUR.md`, `PROCESS.md`, `POS.md`, and `STYLE.md` using absolute paths
   - OpenCode loads `~/.config/opencode/AGENTS.md` globally (takes precedence over CLAUDE.md)
 
 ## Constraints
@@ -33,8 +39,8 @@ The repo may be cloned anywhere. After setup, both Claude Code and OpenCode will
 - Requires Python 3.12
 
 ## Verification
-- After running `setup.py`, Claude Code has `~/.claude/CLAUDE.md` containing `@`-references pointing to `PROCESS.md` and `POS.md` at the correct absolute paths (if Claude Code is installed)
-- After running `setup.py`, OpenCode has `~/.config/opencode/AGENTS.md` containing `@`-references pointing to `PROCESS.md` and `POS.md` at the correct absolute paths (if OpenCode is installed)
-- A Claude Code session started in any directory has the definitions from `PROCESS.md` and `POS.md` in its context
-- An OpenCode session started in any directory has the definitions from `PROCESS.md` and `POS.md` in its context
+- After running `setup.py`, Claude Code has `~/.claude/CLAUDE.md` containing `@`-references pointing to `BEHAVIOUR.md`, `PROCESS.md`, `POS.md`, and `STYLE.md` at the correct absolute paths (if Claude Code is installed)
+- After running `setup.py`, OpenCode has `~/.config/opencode/AGENTS.md` containing `@`-references pointing to `BEHAVIOUR.md`, `PROCESS.md`, `POS.md`, and `STYLE.md` at the correct absolute paths (if OpenCode is installed)
+- A Claude Code session started in any directory has the definitions from `BEHAVIOUR.md`, `PROCESS.md`, `POS.md`, and `STYLE.md` in its context
+- An OpenCode session started in any directory has the definitions from `BEHAVIOUR.md`, `PROCESS.md`, `POS.md`, and `STYLE.md` in its context
 - Automated tests exist in `test.py` and can be run via `./test.py`. Tests use temporary directories to mock the user home directory (`$HOME`) by patching `pathlib.Path.home()` for isolation.
