@@ -48,8 +48,11 @@ def setup_claude(repo_dir):
     content = f"""\
 @{repo_dir}/BEHAVIOUR.md
 @{repo_dir}/PROCESS.md
-@{repo_dir}/POS.md
 @{repo_dir}/STYLE.md
+<!-- The following guide is only relevant for Python projects -->
+@{repo_dir}/POS.md
+<!-- The following guide is only relevant for Rust projects -->
+@{repo_dir}/STYLE-RUST.md
 """
 
     if claude_md.exists() and claude_md.read_text() == content:
@@ -75,8 +78,11 @@ def setup_opencode(repo_dir):
     content = f"""\
 @{repo_dir}/BEHAVIOUR.md
 @{repo_dir}/PROCESS.md
-@{repo_dir}/POS.md
 @{repo_dir}/STYLE.md
+<!-- The following guide is only relevant for Python projects -->
+@{repo_dir}/POS.md
+<!-- The following guide is only relevant for Rust projects -->
+@{repo_dir}/STYLE-RUST.md
 """
 
     if agents_md.exists() and agents_md.read_text() == content:

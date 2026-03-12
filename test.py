@@ -77,8 +77,9 @@ def test_setup_claude_creates_directory(mock_home, temp_home, capsys, reload_set
     content = claude_md.read_text()
     assert f"@{repo_dir}/BEHAVIOUR.md" in content
     assert f"@{repo_dir}/PROCESS.md" in content
-    assert f"@{repo_dir}/POS.md" in content
     assert f"@{repo_dir}/STYLE.md" in content
+    assert f"@{repo_dir}/POS.md" in content
+    assert f"@{repo_dir}/STYLE-RUST.md" in content
 
 
 def test_setup_claude_preserves_existing_different(
@@ -111,8 +112,9 @@ def test_setup_opencode_creates_agents_md(mock_home, temp_home, capsys, reload_s
     content = agents_md.read_text()
     assert f"@{repo_dir}/BEHAVIOUR.md" in content
     assert f"@{repo_dir}/PROCESS.md" in content
-    assert f"@{repo_dir}/POS.md" in content
     assert f"@{repo_dir}/STYLE.md" in content
+    assert f"@{repo_dir}/POS.md" in content
+    assert f"@{repo_dir}/STYLE-RUST.md" in content
 
 
 def test_setup_warns_when_neither_installed(mock_home, temp_home, capsys, reload_setup):
