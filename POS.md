@@ -21,6 +21,13 @@ POS guidance:
     # requires-python = "==3.12.*"
     # ///
     ```
+- Scripts should carry a version constant and expose it via `--version`:
+    ```py
+    VERSION = "1.0.0"
+    ```
+    ```py
+    parser.add_argument("--version", action="version", version=f"%(prog)s {VERSION}")
+    ```
 - Key functions at the top of the file (easy to comment out or jump to); utility functions at the bottom.
 - Use a "main guard" at the bottom of the file. Include the `uv`/venv check here — it is an invocation-mode concern, not business logic — before calling `main()`:
     ```py

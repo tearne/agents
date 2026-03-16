@@ -1,5 +1,5 @@
 # Proposal: Process Per Project
-**Status: Draft**
+**Status: Approved**
 
 ## Intent
 The current setup loads a single change management process globally, but different projects have different needs. Some warrant the full four-phase formal process; others need only lightweight intent capture, approval, and direct implementation. A single global process is too rigid.
@@ -9,7 +9,10 @@ The current setup loads a single change management process globally, but differe
 ### ADDED
 - A library of named process files lives in this repo (`/root/agents/`), each defining a distinct change management style:
   - `PROCESS_FORMAL.md` — the existing four-phase process (propose → design → implement → archive)
-  - `PROCESS_LITE.md` — lightweight: capture and refine intent as a proposal, user approves, implement directly (no design phase, no archive)
+  - `PROCESS_LITE.md` — lightweight three-phase process:
+    - **Propose**: Note → Draft → Approved, same status lifecycle as formal; proposal template applies
+    - **Design**: Required but lightweight — broad outline and task list only; Note → Draft → Approved; no per-task signoff during implementation (tasks are ticked off as they complete)
+    - **Archive**: After the user reviews the completed work; includes updating `SPEC.md` and moving the change folder to `changes/archive/`
 - A project selects its process by `@`-including the chosen file in its local config (`CLAUDE.md` for Claude Code; `AGENTS.md` for OpenCode), e.g. `@/root/agents/PROCESS_FORMAL.md`
 - `~/.claude/CLAUDE.md` carries a standing instruction: on startup, check whether the project's `CLAUDE.md` references a process file; if not, prompt the user to choose one and offer to create or update the local `CLAUDE.md`
 - `~/.config/opencode/AGENTS.md` carries the equivalent instruction, checking the project's `AGENTS.md`

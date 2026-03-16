@@ -76,7 +76,10 @@ def test_setup_claude_creates_directory(mock_home, temp_home, capsys, reload_set
     assert claude_md.exists()
     content = claude_md.read_text()
     assert f"@{repo_dir}/BEHAVIOUR.md" in content
-    assert f"@{repo_dir}/PROCESS.md" in content
+    assert f"@{repo_dir}/VERSIONING.md" in content
+    assert f"@{repo_dir}/PROCESS.md" not in content
+    assert "PROCESS_FORMAL.md" in content or "PROCESS_LITE.md" in content
+    assert "Process Selection" in content
     assert f"@{repo_dir}/STYLE.md" in content
     assert f"@{repo_dir}/POS.md" in content
     assert f"@{repo_dir}/STYLE-RUST.md" in content
@@ -97,7 +100,7 @@ def test_setup_claude_preserves_existing_different(
             setup.setup_claude(repo_dir)
 
     content = existing.read_text()
-    assert f"@{repo_dir}/PROCESS.md" in content
+    assert "Process Selection" in content
 
 
 def test_setup_opencode_creates_agents_md(mock_home, temp_home, capsys, reload_setup):
@@ -111,7 +114,9 @@ def test_setup_opencode_creates_agents_md(mock_home, temp_home, capsys, reload_s
     assert agents_md.exists()
     content = agents_md.read_text()
     assert f"@{repo_dir}/BEHAVIOUR.md" in content
-    assert f"@{repo_dir}/PROCESS.md" in content
+    assert f"@{repo_dir}/VERSIONING.md" in content
+    assert f"@{repo_dir}/PROCESS.md" not in content
+    assert "Process Selection" in content
     assert f"@{repo_dir}/STYLE.md" in content
     assert f"@{repo_dir}/POS.md" in content
     assert f"@{repo_dir}/STYLE-RUST.md" in content

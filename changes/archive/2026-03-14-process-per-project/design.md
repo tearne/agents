@@ -1,5 +1,5 @@
 # Design: Process Per Project
-**Status: Draft**
+**Status: Approved**
 
 ## Approach
 
@@ -15,11 +15,11 @@ The agents repo itself gets a local `CLAUDE.md` (gitignored) pointing to `PROCES
 
 ## Tasks
 
-1. **Impl**: Rename `PROCESS.md` → `PROCESS_FORMAL.md`
-2. **Impl**: Create `PROCESS_LITE.md`
-3. **Impl**: Update `setup.py` to write the new `~/.claude/CLAUDE.md` and OpenCode equivalent (drop `PROCESS.md` reference; add startup check instruction)
-4. **Impl**: Add `CLAUDE.md` and `AGENTS.md` to `.gitignore` in this repo; create local `CLAUDE.md` pointing to `PROCESS_FORMAL.md`
-5. **Tests**: Update `test.py` to reflect the new `~/.claude/CLAUDE.md` content
-6. **Verify**: Run `./test.py`
-7. **Spec**: Update `SPEC.md`
+1. ✓ **Impl**: Rename `PROCESS.md` → `PROCESS_FORMAL.md`
+2. ✓ **Impl**: Create `PROCESS_LITE.md`
+3. ✓ **Impl**: Update `setup.py` to write the new `~/.claude/CLAUDE.md` and OpenCode equivalent (drop `PROCESS.md` reference; add startup check instruction)
+4. ✓ **Impl**: Add `CLAUDE.md` and `AGENTS.md` to `.gitignore` in this repo; create local `CLAUDE.md` pointing to `PROCESS_FORMAL.md`
+5. ✓ **Tests**: Update `test.py` to reflect the new `~/.claude/CLAUDE.md` content
+6. ✓ **Verify**: Run `./test.py`
+7. ✓ **Spec**: Update `SPEC.md`
 8. **Process**: Confirm ready to archive

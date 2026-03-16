@@ -89,6 +89,8 @@ Where possible, tests should be listed as separate items, written first, verifie
 ### 3. Implement
 Work through the task list one item at a time. Mark each task complete with a tick (`✓`) in `design.md` as it is completed. Pause after each task, referencing it by number, and invite the operator to review before proceeding to the next (e.g. "Task 1 ready for review"). Do not modify `SPEC.md` during this phase.
 
+When all tasks are complete, announce the new version number (e.g. "v1.2.3 ready for review") before inviting the user to review the finished work. This signals that implementation is complete and distinguishes the final review from a mid-implementation task review. Each round of corrections after this point warrants a patch bump.
+
 ### 4. Archive
 Apply the proposal delta to the `SPEC.md` alongside the `changes/` directory. Move the change folder to `changes/archive/YYYY-MM-DD-<change-name>/`.
 
