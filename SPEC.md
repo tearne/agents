@@ -14,8 +14,10 @@ The repo may be cloned anywhere. After setup, both Claude Code and OpenCode will
 ## Configuration Files
 - `BEHAVIOUR.md` — general agent behaviour rules (e.g. no unsolicited git writes)
 - `VERSIONING.md` — semantic versioning guidance; loaded globally
-- `PROCESS_FORMAL.md` — full four-phase change management process (propose → design → implement → archive)
-- `PROCESS_LITE.md` — lightweight three-phase change management process (propose → design → archive, no per-task signoff)
+- `PROCESS/README.md` — always-loaded process entry point: SPEC conventions, proposal template, archive rules, active change tracking, Note guidance, and mode selection
+- `PROCESS/FORMAL.md` — full four-phase change management process (propose → design → implement → archive), with per-task signoff
+- `PROCESS/LITE.md` — lightweight three-phase change management process (propose → design → archive), no per-task signoff
+- `PROCESS/EXPERIMENT.md` — experimenting form for exploratory work outside the change process
 - `STYLE.md` — language-agnostic coding style guide (readable abstraction layers)
 - `POS.md` — Python Orchestrated Script style guide (Python projects only)
 - `STYLE-RUST.md` — Rust-specific coding style addendum (Rust projects only)
@@ -29,25 +31,24 @@ The repo may be cloned anywhere. After setup, both Claude Code and OpenCode will
 - For Claude Code:
   - Creates `~/.claude/` directory if it doesn't exist
   - If `~/.claude/CLAUDE.md` already exists, it is backed up with a timestamped filename before being overwritten
-  - Writes `~/.claude/CLAUDE.md` containing `@`-references to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, and `STYLE-RUST.md` using absolute paths, plus a standing instruction to check for a process file selection in the project's local `CLAUDE.md` at session start
+  - Writes `~/.claude/CLAUDE.md` containing `@`-references to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` using absolute paths
   - Claude Code loads `~/.claude/CLAUDE.md` globally
 - For OpenCode:
   - Creates `~/.config/opencode/` if it doesn't exist
   - If `~/.config/opencode/AGENTS.md` already exists, it is backed up with a timestamped filename before being overwritten
-  - Writes `~/.config/opencode/AGENTS.md` containing `@`-references to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, and `STYLE-RUST.md` using absolute paths, plus a standing instruction to check for a process file selection in the project's local `AGENTS.md` at session start
+  - Writes `~/.config/opencode/AGENTS.md` containing `@`-references to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` using absolute paths
   - OpenCode loads `~/.config/opencode/AGENTS.md` globally (takes precedence over CLAUDE.md)
-- Process selection is per-project: a project selects its process by `@`-including either `PROCESS_FORMAL.md` or `PROCESS_LITE.md` in its local config file (`CLAUDE.md` for Claude Code; `AGENTS.md` for OpenCode)
-- At session start, if no process file is referenced in the project's local config, the agent prompts the user to select one and offers to create or update the local config file
+- `PROCESS/README.md` is always loaded globally; it instructs the agent to prompt the user to select a process mode (Formal, Lite, or Experiment) at the start of each change, unless the project config pre-selects one by `@`-referencing the appropriate file from the `PROCESS/` directory
 - The agent also ensures the local config file is listed in the project's `.gitignore`, since it is personal/local configuration
-- `CLAUDE.md` and `AGENTS.md` are listed in this repo's `.gitignore`; a local `CLAUDE.md` selecting `PROCESS_FORMAL.md` is maintained here but not version-controlled
+- `CLAUDE.md` and `AGENTS.md` are listed in this repo's `.gitignore`; a local `CLAUDE.md` selecting `PROCESS/FORMAL.md` is maintained here but not version-controlled
 
 ## Constraints
 - `setup.py` must be run via `uv` (i.e. `./setup.py`), not directly with `python`
 - Requires Python 3.12
 
 ## Verification
-- After running `setup.py`, Claude Code has `~/.claude/CLAUDE.md` containing `@`-references pointing to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, and `STYLE-RUST.md` at the correct absolute paths, and a process selection instruction (if Claude Code is installed)
-- After running `setup.py`, OpenCode has `~/.config/opencode/AGENTS.md` containing `@`-references pointing to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, and `STYLE-RUST.md` at the correct absolute paths, and a process selection instruction (if OpenCode is installed)
-- A Claude Code session started in any directory has the definitions from `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, and `STYLE-RUST.md` in its context, and prompts for process selection if no process file is configured for the project
-- An OpenCode session started in any directory has the definitions from `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, and `STYLE-RUST.md` in its context, and prompts for process selection if no process file is configured for the project
+- After running `setup.py`, Claude Code has `~/.claude/CLAUDE.md` containing `@`-references pointing to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` at the correct absolute paths (if Claude Code is installed)
+- After running `setup.py`, OpenCode has `~/.config/opencode/AGENTS.md` containing `@`-references pointing to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` at the correct absolute paths (if OpenCode is installed)
+- A Claude Code session started in any directory has the definitions from `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` in its context
+- An OpenCode session started in any directory has the definitions from `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` in its context
 - Automated tests exist in `test.py` and can be run via `./test.py`. Tests use temporary directories to mock the user home directory (`$HOME`) by patching `pathlib.Path.home()` for isolation.

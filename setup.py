@@ -54,12 +54,8 @@ def setup_claude(repo_dir):
 <!-- The following guide is only relevant for Rust projects -->
 @{repo_dir}/STYLE-RUST.md
 
-# Process Selection
-At the start of each session, check whether the project's local `CLAUDE.md` contains an \
-`@`-reference to a process file — either `PROCESS_FORMAL.md` or `PROCESS_LITE.md` from \
-`{repo_dir}`. If no process file is referenced, prompt the user to select one and offer \
-to create or update the local `CLAUDE.md` with the appropriate `@`-reference. Also verify \
-that `CLAUDE.md` is listed in the project's `.gitignore`; if not, offer to add it.
+# Process
+@{repo_dir}/PROCESS/README.md
 """
 
     if claude_md.exists() and claude_md.read_text() == content:
@@ -91,12 +87,8 @@ def setup_opencode(repo_dir):
 <!-- The following guide is only relevant for Rust projects -->
 @{repo_dir}/STYLE-RUST.md
 
-# Process Selection
-At the start of each session, check whether the project's local `AGENTS.md` contains an \
-`@`-reference to a process file — either `PROCESS_FORMAL.md` or `PROCESS_LITE.md` from \
-`{repo_dir}`. If no process file is referenced, prompt the user to select one and offer \
-to create or update the local `AGENTS.md` with the appropriate `@`-reference. Also verify \
-that `AGENTS.md` is listed in the project's `.gitignore`; if not, offer to add it.
+# Process
+@{repo_dir}/PROCESS/README.md
 """
 
     if agents_md.exists() and agents_md.read_text() == content:
