@@ -3,14 +3,15 @@ The POS style helps Python take the place of native shell scripts. It strategica
 
 POS guidance:
 - Prefer `subprocess` for shell commands; use Python for control flow. This makes commands easy to discover and copy-paste into a terminal.
+    - Always use `shell=True` with a plain string — this keeps commands terminal-ready and avoids the need for `FileNotFoundError` handling (the shell handles command resolution; use `returncode` or `check=True` for error detection instead).
     - Examples:
         - To download the latest version of the `helix` `deb` for `amd64`:
         ```py
-        subprocess.run(r"""curl -s https://api.github.com/repos/helix-editor/helix/releases/latest | grep -oP '"browser_download_url": "\K[^"]*amd64.deb' | xargs wget""")
+        subprocess.run(r"""curl -s https://api.github.com/repos/helix-editor/helix/releases/latest | grep -oP '"browser_download_url": "\K[^"]*amd64.deb' | xargs wget""", shell=True)
         ```
         - To apt install `curl`:
         ```py
-        subprocess.run("""DEBIAN_FRONTEND=noninteractive apt-get install -y curl""")
+        subprocess.run("""DEBIAN_FRONTEND=noninteractive apt-get install -y curl""", shell=True)
         ```
     - But don't take this to an extreme and force trivial actions like loops into the shell.
 - Prefer a single Python source file, unless it compromises readability.

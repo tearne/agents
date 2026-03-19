@@ -1,5 +1,5 @@
 # Proposal: POS — Prefer shell=True for subprocess commands
-**Status: Draft**
+**Status: Approved**
 
 ## Intent
 POS scripts are meant to bridge Python control flow with shell commands. A key goal is that commands should be easy to read, copy, and paste directly into a terminal. Passing a list to `subprocess.run` obscures this by hiding the command inside Python syntax. Using `shell=True` with a plain string keeps each command immediately recognisable and terminal-ready.
