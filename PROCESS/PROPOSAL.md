@@ -1,12 +1,12 @@
-# Formal Process
+# Proposal Process
 
-A four-phase process with per-task signoff at each step.
+A four-phase process for changes that touch code and update the spec.
 
 | Phase | Action | Output |
 |-------|--------|--------|
-| **1. Propose** | Define intent and scope | `changes/open/<change-name>/proposal_formal.md` |
+| **1. Propose** | Define intent and scope | `changes/open/<change-name>/proposal.md` |
 | **2. Design** | Plan the technical approach and tasks | `changes/open/<change-name>/design.md` |
-| **3. Implement** | Execute tasks one at a time, pausing for review after each | Updated code/tests |
+| **3. Implement** | Execute tasks and review | Updated code/tests |
 | **4. Archive** | Apply the proposal delta to `SPEC.md`; move the change folder | Updated `SPEC.md` |
 
 Each phase requires explicit approval before the next begins.
@@ -15,7 +15,7 @@ Each phase requires explicit approval before the next begins.
 
 ## 1. Propose
 
-Create a `proposal_formal.md` in `changes/open/<change-name>/`. If the change originated as a Note, retain the `note.md` alongside it.
+Create a `proposal.md` in `changes/open/<change-name>/`. If the change originated as a Note, retain the `note.md` alongside it.
 
 A proposal in `Status: Draft` is a work in progress; `Status: Approved` means the user has approved it and the next phase may begin.
 
@@ -73,7 +73,11 @@ Where possible, tests should be listed as separate items, written first, and ver
 
 ## 3. Implement
 
-Work through the task list one item at a time. Mark each task complete with a tick (`✓`) in `design.md` as it is completed. Pause after each task, referencing it by number, and invite the user to review before proceeding to the next (e.g. "Task 1 ready for review"). Do not modify `SPEC.md` during this phase.
+Work through the task list, marking each task complete with a tick (`✓`) in `design.md` as it is completed. Do not modify `SPEC.md` during this phase.
+
+Review cadence is agreed with the user at the start of this phase:
+- **Per-task**: pause after each task and invite review before proceeding
+- **End review**: implement freely until all tasks are done, then invite review
 
 When all tasks are complete, announce the new version number (e.g. "v1.2.3 ready for review") before inviting the user to review the finished work. Each round of corrections after this point warrants a patch bump.
 
@@ -82,6 +86,6 @@ When all tasks are complete, announce the new version number (e.g. "v1.2.3 ready
 Apply the proposal delta to the `SPEC.md` alongside the `changes/` directory. Move the change folder to `changes/archive/YYYY-MM-DD-<change-name>/`. Remove `changes/open/active.md`.
 
 Before archiving, ensure the change folder is complete:
-- **No proposal**: prompt the user to retrospectively capture intent in a `proposal_formal.md` before proceeding
-- **No design, or no formal design phase followed**: create a minimal `design.md` describing what was done, marked `*(retrospective)*`
+- **No proposal**: prompt the user to retrospectively capture intent in a `proposal.md` before proceeding
+- **No design**: create a minimal `design.md` describing what was done, marked `*(retrospective)*`
 - **Proposal not marked Approved**: if the change was approved, update the status to `Approved`; otherwise flag to the user before proceeding

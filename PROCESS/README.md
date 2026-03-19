@@ -21,32 +21,30 @@ A specification will typically follow a structure such as:
 
 ## Types of Change
 
-**Note** — A `note.md` in `changes/open/<name>/`. Freeform, no required structure. Notes do not touch code and are exempt from active change tracking. To progress a Note, the user selects a mode (Formal, Lite, or Experiment); the `note.md` is retained alongside the new `proposal_formal.md`, `proposal_lite.md`, or `experiment.md` as a record of the original capture.
+**Note** — A `note.md` in `changes/open/<name>/`. Freeform, no required structure. Notes do not touch code and are exempt from active change tracking. To progress a Note, the user selects a type (Proposal or Experiment); the `note.md` is retained alongside the new `proposal.md` or `experiment.md` as a record of the original capture.
 
-**Formal** — A structured four-phase process with per-task signoff. Use for changes where close review at each step is warranted. See `PROCESS/FORMAL.md`.
-
-**Lite** — A three-phase process with a single review at the end. Use for smaller or lower-risk changes. See `PROCESS/LITE.md`.
+**Proposal** — A four-phase process: Propose, Design, Implement, Archive. Review cadence during implementation (per-task or end review) is agreed with the user at the start of that phase. See `PROCESS/PROPOSAL.md`.
 
 **Experiment** — Exploratory work outside the change process. May or may not lead to a spec change. See `PROCESS/EXPERIMENT.md`.
 
 ## Active Change Tracking
 
-A file `changes/open/active.md` records the current active change — one that is touching code. The agent must:
+A file `changes/open/active.md` records the current active change — one that is modifying project assets. The agent must:
 - Check for `changes/open/active.md` at the start of each session and remind the user of the active change if one is recorded.
 - Create or update `active.md` when a change begins touching code.
-- Warn the user if a conversation starts drifting towards opening a new change while one is already recorded in `active.md`.
+- Warn the user if a second change is about to begin *implementation* while one is already recorded in `active.md`.
 - Remove `active.md` when the active change is archived.
 
-Notes are exempt — since they do not count as active changes and can't directly effect change on the project.
+Notes, proposals, and experiment documents may be created freely at any time — none become active until project assets are modified. A change stops being active when it is archived.
 
 Format:
 ```markdown
 # Active Change
 **Name**: <change-name>
-**Type**: Formal | Lite | Experiment
+**Type**: Proposal | Experiment
 **Phase**: <current phase or status>
 ```
 
-## Mode Selection
+## Starting a Change
 
-Prompt the user to choose a mode before proceeding with any change.
+Changes can begin as a Note (freeform capture) or directly as a Proposal or Experiment. A Note can be progressed to either type when the intent is clear enough to commit to a direction.

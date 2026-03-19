@@ -14,10 +14,9 @@ The repo may be cloned anywhere. After setup, both Claude Code and OpenCode will
 ## Configuration Files
 - `BEHAVIOUR.md` — general agent behaviour rules (e.g. no unsolicited git writes)
 - `VERSIONING.md` — semantic versioning guidance; loaded globally
-- `PROCESS/README.md` — always-loaded process entry point: SPEC conventions, proposal template, archive rules, active change tracking, Note guidance, and mode selection
-- `PROCESS/FORMAL.md` — full four-phase change management process (propose → design → implement → archive), with per-task signoff
-- `PROCESS/LITE.md` — lightweight three-phase change management process (propose → design → archive), no per-task signoff
-- `PROCESS/EXPERIMENT.md` — experimenting form for exploratory work outside the change process
+- `PROCESS/README.md` — always-loaded process entry point: SPEC conventions, change types (Note, Proposal, Experiment), active change tracking, and how to start a change
+- `PROCESS/PROPOSAL.md` — four-phase change management process (propose → design → implement → archive); review cadence agreed at the start of implementation
+- `PROCESS/EXPERIMENT.md` — template for exploratory work outside the change process
 - `STYLE.md` — language-agnostic coding style guide (readable abstraction layers)
 - `POS.md` — Python Orchestrated Script style guide (Python projects only)
 - `STYLE-RUST.md` — Rust-specific coding style addendum (Rust projects only)
@@ -38,9 +37,9 @@ The repo may be cloned anywhere. After setup, both Claude Code and OpenCode will
   - If `~/.config/opencode/AGENTS.md` already exists, it is backed up with a timestamped filename before being overwritten
   - Writes `~/.config/opencode/AGENTS.md` containing `@`-references to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` using absolute paths
   - OpenCode loads `~/.config/opencode/AGENTS.md` globally (takes precedence over CLAUDE.md)
-- `PROCESS/README.md` is always loaded globally; it instructs the agent to prompt the user to select a process mode (Formal, Lite, or Experiment) at the start of each change, unless the project config pre-selects one by `@`-referencing the appropriate file from the `PROCESS/` directory
+- `PROCESS/README.md` is always loaded globally; it instructs the agent on change types and active change tracking
 - The agent also ensures the local config file is listed in the project's `.gitignore`, since it is personal/local configuration
-- `CLAUDE.md` and `AGENTS.md` are listed in this repo's `.gitignore`; a local `CLAUDE.md` selecting `PROCESS/FORMAL.md` is maintained here but not version-controlled
+- `CLAUDE.md` and `AGENTS.md` are listed in this repo's `.gitignore`
 
 ## Constraints
 - `setup.py` must be run via `uv` (i.e. `./setup.py`), not directly with `python`
