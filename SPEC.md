@@ -12,14 +12,20 @@ cd ~/path/to/agents && ./setup.py
 The repo may be cloned anywhere. After setup, both Claude Code and OpenCode will load the configurations automatically in every project.
 
 ## Configuration Files
-- `BEHAVIOUR.md` — general agent behaviour rules (e.g. no unsolicited git writes)
-- `VERSIONING.md` — semantic versioning guidance; loaded globally
-- `PROCESS/README.md` — always-loaded process entry point: SPEC conventions, change types (Note, Proposal, Experiment), active change tracking, and how to start a change
-- `PROCESS/PROPOSAL.md` — four-phase change management process (propose → design → implement → archive); review cadence agreed at the start of implementation
-- `PROCESS/EXPERIMENT.md` — template for exploratory work outside the change process
-- `STYLE.md` — language-agnostic coding style guide (readable abstraction layers)
-- `POS.md` — Python Orchestrated Script style guide (Python projects only)
-- `STYLE-RUST.md` — Rust-specific coding style addendum (Rust projects only)
+
+All agent configuration lives under `AGENT/`. `AGENT/README.md` is the single always-loaded entry point; it fans out via `@`-includes to the always-loaded files and introduces project-level concepts (specs, changes directory).
+
+Always loaded (via `AGENT/README.md`):
+- `AGENT/BEHAVIOUR.md` — general agent behaviour rules (e.g. no unsolicited git writes)
+- `AGENT/STYLE.md` — language-agnostic coding style (terse rules); see `AGENT/ADDITIONAL/STYLE-elaboration.md` for examples and references
+- `AGENT/STYLE-RUST.md` — Rust-specific coding style addendum; applies to Rust projects only
+- `AGENT/PROCESS/README.md` — change management entry point: change types, active change tracking, additional guides, and how to start a change
+- `AGENT/PROCESS/PROPOSAL.md` — four-phase change management process (propose → design → implement → archive); review cadence agreed at the start of implementation
+- `AGENT/PROCESS/EXPERIMENT.md` — template for exploratory work outside the change process
+
+Additional (opt-in or prompted — see `AGENT/ADDITIONAL/README.md`):
+- `AGENT/ADDITIONAL/VERSIONING.md` — semantic versioning conventions; prompted by the agent when relevant
+- `AGENT/ADDITIONAL/POS.md` — Python Orchestrated Script style; named in spec or proposal when applicable
 
 ## Behaviour
 - `setup.py` determines its own absolute location
@@ -30,14 +36,14 @@ The repo may be cloned anywhere. After setup, both Claude Code and OpenCode will
 - For Claude Code:
   - Creates `~/.claude/` directory if it doesn't exist
   - If `~/.claude/CLAUDE.md` already exists, it is backed up with a timestamped filename before being overwritten
-  - Writes `~/.claude/CLAUDE.md` containing `@`-references to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` using absolute paths
+  - Writes `~/.claude/CLAUDE.md` containing a single `@`-reference to `AGENT/README.md` using its absolute path
   - Claude Code loads `~/.claude/CLAUDE.md` globally
 - For OpenCode:
   - Creates `~/.config/opencode/` if it doesn't exist
   - If `~/.config/opencode/AGENTS.md` already exists, it is backed up with a timestamped filename before being overwritten
-  - Writes `~/.config/opencode/AGENTS.md` containing `@`-references to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` using absolute paths
+  - Writes `~/.config/opencode/AGENTS.md` containing a single `@`-reference to `AGENT/README.md` using its absolute path
   - OpenCode loads `~/.config/opencode/AGENTS.md` globally (takes precedence over CLAUDE.md)
-- `PROCESS/README.md` is always loaded globally; it instructs the agent on change types and active change tracking
+- `AGENT/README.md` is always loaded globally as the single entry point; it fans out to all always-loaded files
 - The agent also ensures the local config file is listed in the project's `.gitignore`, since it is personal/local configuration
 - `CLAUDE.md` and `AGENTS.md` are listed in this repo's `.gitignore`
 
@@ -46,8 +52,8 @@ The repo may be cloned anywhere. After setup, both Claude Code and OpenCode will
 - Requires Python 3.12
 
 ## Verification
-- After running `setup.py`, Claude Code has `~/.claude/CLAUDE.md` containing `@`-references pointing to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` at the correct absolute paths (if Claude Code is installed)
-- After running `setup.py`, OpenCode has `~/.config/opencode/AGENTS.md` containing `@`-references pointing to `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` at the correct absolute paths (if OpenCode is installed)
-- A Claude Code session started in any directory has the definitions from `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` in its context
-- An OpenCode session started in any directory has the definitions from `BEHAVIOUR.md`, `VERSIONING.md`, `STYLE.md`, `POS.md`, `STYLE-RUST.md`, and `PROCESS/README.md` in its context
+- After running `setup.py`, Claude Code has `~/.claude/CLAUDE.md` containing a single `@`-reference to `AGENT/README.md` at the correct absolute path (if Claude Code is installed)
+- After running `setup.py`, OpenCode has `~/.config/opencode/AGENTS.md` containing a single `@`-reference to `AGENT/README.md` at the correct absolute path (if OpenCode is installed)
+- A Claude Code session started in any directory has the definitions from `AGENT/README.md` and all files it references in its context
+- An OpenCode session started in any directory has the definitions from `AGENT/README.md` and all files it references in its context
 - Automated tests exist in `test.py` and can be run via `./test.py`. Tests use temporary directories to mock the user home directory (`$HOME`) by patching `pathlib.Path.home()` for isolation.

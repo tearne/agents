@@ -1,23 +1,5 @@
 # Process
-
-This directory contains the change management process for use with Claude Code and OpenCode. It is always loaded via the global config file (`~/.claude/CLAUDE.md` or `~/.config/opencode/AGENTS.md`).
-
-## Specifications
-
-Project specifications are contained in `SPEC.md` files (or a `SPEC/` directory when a single file would be too large):
-- The **root** `SPEC.md` covers the project as a whole (structure, shared requirements, integration testing).
-- During spec changes, relevant assets such as proposals are stored in subfolders of the `changes` directory, placed alongside the relevant `SPEC.md`.
-- Directory `SPEC.md` files are scoped to components in that directory and below, inheriting project-wide non-functional requirements unless explicitly overridden.
-
-A specification will typically follow a structure such as:
-```markdown
-# Specification
-## Overview
-## Usage
-## Behaviour
-## Constraints
-## Verification
-```
+This file covers how changes are managed. For project-level concepts (specs, changes directory), see `AGENT/README.md`.
 
 ## Types of Change
 
@@ -44,6 +26,14 @@ Format:
 **Type**: Proposal | Experiment
 **Phase**: <current phase or status>
 ```
+
+## Additional Guides
+
+The `ADDITIONAL/` directory contains guides that are not always loaded. `ADDITIONAL/README.md` lists what is available. Two loading modes:
+- **Passive** — the user names the guide in a spec or proposal; the agent applies it from there
+- **Prompted** — the agent raises the guide when context warrants, without waiting to be told (e.g. `VERSIONING.md` when a project is being set up or a breaking change is being made)
+
+Companion files named `*-elaboration.md` exist alongside some guides. They contain examples and references and need not be loaded unless the agent judges additional context is needed.
 
 ## Starting a Change
 

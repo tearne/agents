@@ -46,16 +46,7 @@ def setup_claude(repo_dir):
     claude_dir.mkdir(parents=True, exist_ok=True)
     claude_md = claude_dir / "CLAUDE.md"
     content = f"""\
-@{repo_dir}/BEHAVIOUR.md
-@{repo_dir}/VERSIONING.md
-@{repo_dir}/STYLE.md
-<!-- The following guide is only relevant for Python projects -->
-@{repo_dir}/POS.md
-<!-- The following guide is only relevant for Rust projects -->
-@{repo_dir}/STYLE-RUST.md
-
-# Process
-@{repo_dir}/PROCESS/README.md
+@{repo_dir}/AGENT/README.md
 """
 
     if claude_md.exists() and claude_md.read_text() == content:
@@ -79,16 +70,7 @@ def setup_opencode(repo_dir):
     config_dir.mkdir(parents=True, exist_ok=True)
 
     content = f"""\
-@{repo_dir}/BEHAVIOUR.md
-@{repo_dir}/VERSIONING.md
-@{repo_dir}/STYLE.md
-<!-- The following guide is only relevant for Python projects -->
-@{repo_dir}/POS.md
-<!-- The following guide is only relevant for Rust projects -->
-@{repo_dir}/STYLE-RUST.md
-
-# Process
-@{repo_dir}/PROCESS/README.md
+@{repo_dir}/AGENT/README.md
 """
 
     if agents_md.exists() and agents_md.read_text() == content:
