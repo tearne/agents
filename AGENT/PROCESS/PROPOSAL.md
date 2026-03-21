@@ -1,27 +1,25 @@
 # Proposal Process
 
-A four-phase process for changes that touch code and update the spec.
+A proposal moves through five statuses, each requiring explicit user approval to advance:
 
-| Phase | Action | Output |
-|-------|--------|--------|
-| **1. Propose** | Define intent and scope | `changes/open/<change-name>/proposal.md` |
-| **2. Design** | Plan the technical approach and tasks | `changes/open/<change-name>/design.md` |
-| **3. Implement** | Execute tasks and review | Updated code/tests |
-| **4. Archive** | Apply the proposal delta to `SPEC.md`; move the change folder | Updated `SPEC.md` |
+`Draft` → `Approved` → `Designing` → `Implementing` → `Archived`
 
-Each phase requires explicit approval before the next begins.
+The status is recorded in `change.md` throughout. Do not advance status without explicit user instruction.
 
 > **Getting started**: When setting up a new project, create the initial `SPEC.md` directly. Once it is in place, open a change using the name `initial-implementation` to design and carry out the first implementation.
 
-## 1. Propose
+## Draft
 
-Create a `proposal.md` in `changes/open/<change-name>/`. If the change originated as a Note, retain the `note.md` alongside it.
+Create `change.md` in `changes/open/<change-name>/`. A Draft is freeform — no required structure.
 
-A proposal in `Status: Draft` is a work in progress; `Status: Approved` means the user has approved it and the next phase may begin.
+## Draft → Approved
+
+Structure (Intent, Specification Deltas, Scope) is required before the user can mark it Approved.
 
 ```markdown
-# Proposal: <Change Name>
-**Status: Draft | Approved**
+# <Change Name>
+**Type**: Proposal
+**Status**: Draft
 
 ## Unresolved (optional)
 - Items not yet fully specified
@@ -49,9 +47,9 @@ Omit delta sections which aren't relevant.
 
 > **Behaviour over implementation**: Intent is often expressed in technical or implementation terms — that is fine for drafts. Before a proposal is finalised, guide the user towards expressing required behaviours instead. Reserve technical specification for genuine constraints or non-functional requirements.
 
-## 2. Design
+## Approved → Designing
 
-Create a `design.md` in the same change folder. It should explain *how* the approved spec changes will be realised and include an ordered task list — implementation-specific detail belongs here, not in the proposal or spec.
+Create `design.md` in the same change folder. It should explain *how* the approved spec changes will be realised and include an ordered task list — implementation-specific detail belongs here, not in the proposal or spec.
 
 ```markdown
 # Design: <Change Name>
@@ -71,21 +69,22 @@ Tasks should clearly indicate the asset they will work on. e.g. "Spec", "Tests",
 
 Where possible, tests should be listed as separate items, written first, and verified to fail (TDD style).
 
-## 3. Implement
+## Designing → Implementing
 
-Work through the task list, marking each task complete with a tick (`✓`) in `design.md` as it is completed. Do not modify `SPEC.md` during this phase.
-
-Review cadence is agreed with the user at the start of this phase:
+Agree review cadence with the user before starting:
 - **Per-task**: pause after each task and invite review before proceeding
 - **End review**: implement freely until all tasks are done, then invite review
 
-When all tasks are complete, announce the new version number (e.g. "v1.2.3 ready for review") before inviting the user to review the finished work. Each round of corrections after this point warrants a patch bump.
+Work through the task list, marking each task complete with a tick (`✓`) in `design.md`. Do not modify `SPEC.md` during this phase.
 
-## 4. Archive
+When all tasks are complete, announce the new version number (e.g. "v1.2.3 ready for review") and invite the user to review. Each round of corrections after this point warrants a patch bump.
 
-Apply the proposal delta to the `SPEC.md` alongside the `changes/` directory. Move the change folder to `changes/archive/YYYY-MM-DD-<change-name>/`. Remove `changes/open/active.md`.
+## Implementing → Archived
+
+**Do not archive without an explicit user instruction. Task completion alone is not sufficient.**
+
+Apply the proposal delta to `SPEC.md`. Move the change folder to `changes/archive/YYYY-MM-DD-<change-name>/`. Remove `changes/open/active.md`.
 
 Before archiving, ensure the change folder is complete:
-- **No proposal**: prompt the user to retrospectively capture intent in a `proposal.md` before proceeding
 - **No design**: create a minimal `design.md` describing what was done, marked `*(retrospective)*`
-- **Proposal not marked Approved**: if the change was approved, update the status to `Approved`; otherwise flag to the user before proceeding
+- **`change.md` not marked Approved**: if the change was approved, update the status; otherwise flag to the user before proceeding

@@ -3,38 +3,50 @@ This file covers how changes are managed. For project-level concepts (specs, cha
 
 ## Types of Change
 
-**Note** — A `note.md` in `changes/open/<name>/`. Freeform, no required structure. Notes do not touch code and are exempt from active change tracking. To progress a Note, the user selects a type (Proposal or Experiment); the `note.md` is retained alongside the new `proposal.md` or `experiment.md` as a record of the original capture.
+**Fix** — A small, well-understood change. If it grows in complexity or uncertainty, escalate to a Proposal or Spike.
 
-**Proposal** — A four-phase process: Propose, Design, Implement, Archive. Review cadence during implementation (per-task or end review) is agreed with the user at the start of that phase. See `PROCESS/PROPOSAL.md`.
-
-**Experiment** — Exploratory work outside the change process. May or may not lead to a spec change. See `PROCESS/EXPERIMENT.md`.
-
-## Active Change Tracking
-
-A file `changes/open/active.md` records the current active change — one that is modifying project assets. The agent must:
-- Check for `changes/open/active.md` at the start of each session and remind the user of the active change if one is recorded.
-- Create or update `active.md` when a change begins touching code.
-- Warn the user if a second change is about to begin *implementation* while one is already recorded in `active.md`.
-- Remove `active.md` when the active change is archived.
-
-Notes, proposals, and experiment documents may be created freely at any time — none become active until project assets are modified. A change stops being active when it is archived.
-
-Format:
 ```markdown
-# Active Change
-**Name**: <change-name>
-**Type**: Proposal | Experiment
-**Phase**: <current phase or status>
+# <Change Name>
+**Type**: Fix
+**Status**: Open
+
+## Log
+Freeform record of what was done.
 ```
 
-## Additional Guides
+**Proposal** — A change where the intent and approach can be defined upfront. See `PROCESS/PROPOSAL.md`.
 
-The `ADDITIONAL/` directory contains guides that are not always loaded. `ADDITIONAL/README.md` lists what is available. Two loading modes:
-- **Passive** — the user names the guide in a spec or proposal; the agent applies it from there
-- **Prompted** — the agent raises the guide when context warrants, without waiting to be told (e.g. `VERSIONING.md` when a project is being set up or a breaking change is being made)
+**Spike** — Exploration towards a clear goal where the path is unknown. See `PROCESS/SPIKE.md`.
 
-Companion files named `*-elaboration.md` exist alongside some guides. They contain examples and references and need not be loaded unless the agent judges additional context is needed.
+Changes may move between types as understanding evolves; update `**Type**` in `change.md` accordingly.
 
 ## Starting a Change
 
-Changes can begin as a Note (freeform capture) or directly as a Proposal or Experiment. A Note can be progressed to either type when the intent is clear enough to commit to a direction.
+All changes begin with a `change.md` in `changes/open/<change-name>/`. The type and status are declared at the top.
+
+## Active Change Tracking
+
+`changes/open/active.md` identifies the current active change for project resources. Change documents are exempt from the following controls.
+
+- **Session start** — if `active.md` exists, remind the user of the active change
+- **Before editing any project asset** — check `active.md` does not exist, then create it; if missed, create it retrospectively and flag the gap; the user may explicitly waive this
+- **If `active.md` already exists** — stop and escalate to the user before proceeding
+- **On archive** — remove `active.md`
+
+```markdown
+# Active Change
+**Name**: <change-name>
+**Type**: Fix | Proposal | Spike
+```
+
+## Archival Expectations
+
+Archival requires an explicit user instruction — task completion alone is never sufficient to proceed.
+
+- **Fix** — `change.md` with log
+- **Proposal** — `change.md` and `design.md`, plus any other assets produced during implementation
+- **Spike** — `change.md` and `findings.md`, plus any other assets as relevant
+
+## Additional Guides
+
+Optional guides live in `ADDITIONAL/`. See `ADDITIONAL/README.md`.

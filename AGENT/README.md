@@ -25,5 +25,5 @@ A specification will typically follow this structure:
 ## Changes
 
 Work in progress and completed changes live in a `changes/` directory alongside the root `SPEC.md`:
-- `changes/open/` — active notes, proposals, experiments, and the current `active.md`
+- `changes/open/` — fixes, proposals, spikes, and the current `active.md`
 - `changes/archive/` — completed and abandoned changes, named `YYYY-MM-DD-<change-name>/`
