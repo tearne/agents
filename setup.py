@@ -46,7 +46,11 @@ def setup_claude(repo_dir):
     claude_dir.mkdir(parents=True, exist_ok=True)
     claude_md = claude_dir / "CLAUDE.md"
     content = f"""\
-Before editing any project files outside `changes/`, the current change must be recorded in `changes/open/active.md`. See `AGENT/PROCESS/README.md` for the change process.
+Before writing or editing any project file, the current change must be recorded in `changes/open/active.md`. The following are always permitted without an active change:
+- Reading any project file
+- Writing or editing files inside `changes/`
+
+See `AGENT/PROCESS/README.md` for the change process.
 
 @{repo_dir}/AGENT/README.md
 """
@@ -72,7 +76,11 @@ def setup_opencode(repo_dir):
     config_dir.mkdir(parents=True, exist_ok=True)
 
     content = f"""\
-Before editing any project files outside `changes/`, the current change must be recorded in `changes/open/active.md`. See `AGENT/PROCESS/README.md` for the change process.
+Before writing or editing any project file, the current change must be recorded in `changes/open/active.md`. The following are always permitted without an active change:
+- Reading any project file
+- Writing or editing files inside `changes/`
+
+See `AGENT/PROCESS/README.md` for the change process.
 
 @{repo_dir}/AGENT/README.md
 """

@@ -78,7 +78,7 @@ def test_setup_claude_creates_directory(mock_home, temp_home, capsys, reload_set
     assert f"@{repo_dir}/AGENT/README.md" in content
     assert f"@{repo_dir}/AGENT/BEHAVIOUR.md" not in content
     assert f"@{repo_dir}/AGENT/PROCESS/README.md" not in content
-    preamble = "Before editing any project files outside `changes/`"
+    preamble = "Before writing or editing any project file, the current change must be recorded"
     include = f"@{repo_dir}/AGENT/README.md"
     assert content.index(preamble) < content.index(include)
 
@@ -114,7 +114,7 @@ def test_setup_opencode_creates_agents_md(mock_home, temp_home, capsys, reload_s
     assert f"@{repo_dir}/AGENT/README.md" in content
     assert f"@{repo_dir}/AGENT/BEHAVIOUR.md" not in content
     assert f"@{repo_dir}/AGENT/PROCESS/README.md" not in content
-    preamble = "Before editing any project files outside `changes/`"
+    preamble = "Before writing or editing any project file, the current change must be recorded"
     include = f"@{repo_dir}/AGENT/README.md"
     assert content.index(preamble) < content.index(include)
 
