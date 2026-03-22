@@ -3,12 +3,12 @@ This file covers how changes are managed. For project-level concepts (specs, cha
 
 ## Types of Change
 
-**Fix** — A small, well-understood change. If it grows in complexity or uncertainty, escalate to a Proposal or Spike.
+**Fix** — A small, well-understood change. If it grows in complexity or uncertainty, escalate to a Proposal or Spike. User approval of `change.md` is required before work begins.
 
 ```markdown
 # <Change Name>
 **Type**: Fix
-**Status**: Open
+**Status**: Draft | Approved
 
 ## Log
 Freeform record of what was done.
