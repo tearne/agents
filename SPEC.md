@@ -40,12 +40,12 @@ Additional (opt-in or prompted — see `AGENT/ADDITIONAL/README.md`):
 - For Claude Code:
   - Creates `~/.claude/` directory if it doesn't exist
   - If `~/.claude/CLAUDE.md` already exists, it is backed up with a timestamped filename before being overwritten
-  - Writes `~/.claude/CLAUDE.md` containing a preamble line enforcing the active change constraint, followed by a single `@`-reference to `AGENT/README.md` using its absolute path
+  - Writes `~/.claude/CLAUDE.md` containing a preamble enforcing the active change constraint and decision gate, followed by a single `@`-reference to `AGENT/README.md` using its absolute path
   - Claude Code loads `~/.claude/CLAUDE.md` globally
 - For OpenCode:
   - Creates `~/.config/opencode/` if it doesn't exist
   - If `~/.config/opencode/AGENTS.md` already exists, it is backed up with a timestamped filename before being overwritten
-  - Writes `~/.config/opencode/AGENTS.md` containing a preamble line enforcing the active change constraint, followed by a single `@`-reference to `AGENT/README.md` using its absolute path
+  - Writes `~/.config/opencode/AGENTS.md` containing a preamble enforcing the active change constraint and decision gate, followed by a single `@`-reference to `AGENT/README.md` using its absolute path
   - OpenCode loads `~/.config/opencode/AGENTS.md` globally (takes precedence over CLAUDE.md)
 - `AGENT/README.md` is always loaded globally as the single entry point; it fans out to all always-loaded files
 - The agent also ensures the local config file is listed in the project's `.gitignore`, since it is personal/local configuration

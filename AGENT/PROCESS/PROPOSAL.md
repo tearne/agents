@@ -4,7 +4,7 @@ A proposal moves through five statuses, each requiring explicit user approval to
 
 `Draft` → `Approved` → `Designing` → `Implementing` → `Archived`
 
-The status is recorded in `change.md` throughout. Do not advance status without explicit user instruction.
+The status is recorded in `change.md` throughout.
 
 > **Getting started**: When setting up a new project, create the initial `SPEC.md` directly. Once it is in place, open a change using the name `initial-implementation` to design and carry out the first implementation.
 

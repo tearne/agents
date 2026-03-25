@@ -50,6 +50,8 @@ Before writing or editing any project file, the current change must be recorded 
 - Reading any project file
 - Writing or editing files inside `changes/`
 
+Do not make any change management decision — starting, pausing, advancing, or archiving a change — without explicit user instruction.
+
 See `AGENT/PROCESS/README.md` for the change process.
 
 @{repo_dir}/AGENT/README.md
@@ -79,6 +81,8 @@ def setup_opencode(repo_dir):
 Before writing or editing any project file, the current change must be recorded in `changes/open/active.md`. The following are always permitted without an active change:
 - Reading any project file
 - Writing or editing files inside `changes/`
+
+Do not make any change management decision — starting, pausing, advancing, or archiving a change — without explicit user instruction.
 
 See `AGENT/PROCESS/README.md` for the change process.
 
