@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --script
+#!/usr/bin/env -S uv run --script --
 # /// script
 # requires-python = "==3.12.*"
 # dependencies = ["pytest"]
@@ -78,12 +78,10 @@ def test_setup_claude_creates_directory(mock_home, temp_home, capsys, reload_set
     assert f"@{repo_dir}/AGENT/README.md" in content
     assert f"@{repo_dir}/AGENT/BEHAVIOUR.md" not in content
     assert f"@{repo_dir}/AGENT/PROCESS/README.md" not in content
-    preamble = "Before writing or editing any project file, the current change must be recorded"
-    decision_gate = "Do not make any change management decision"
+    preamble = "Before starting any work, read and apply `AGENT/README.md`"
     include = f"@{repo_dir}/AGENT/README.md"
+    assert preamble in content
     assert content.index(preamble) < content.index(include)
-    assert decision_gate in content
-    assert content.index(decision_gate) < content.index(include)
 
 
 def test_setup_claude_preserves_existing_different(
@@ -117,12 +115,10 @@ def test_setup_opencode_creates_agents_md(mock_home, temp_home, capsys, reload_s
     assert f"@{repo_dir}/AGENT/README.md" in content
     assert f"@{repo_dir}/AGENT/BEHAVIOUR.md" not in content
     assert f"@{repo_dir}/AGENT/PROCESS/README.md" not in content
-    preamble = "Before writing or editing any project file, the current change must be recorded"
-    decision_gate = "Do not make any change management decision"
+    preamble = "Before starting any work, read and apply `AGENT/README.md`"
     include = f"@{repo_dir}/AGENT/README.md"
+    assert preamble in content
     assert content.index(preamble) < content.index(include)
-    assert decision_gate in content
-    assert content.index(decision_gate) < content.index(include)
 
 
 def test_setup_warns_when_neither_installed(mock_home, temp_home, capsys, reload_setup):

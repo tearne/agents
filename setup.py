@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --script
+#!/usr/bin/env -S uv run --script --
 # /// script
 # requires-python = "==3.12.*"
 # ///
@@ -46,13 +46,7 @@ def setup_claude(repo_dir):
     claude_dir.mkdir(parents=True, exist_ok=True)
     claude_md = claude_dir / "CLAUDE.md"
     content = f"""\
-Before writing or editing any project file, the current change must be recorded in `changes/open/active.md`. The following are always permitted without an active change:
-- Reading any project file
-- Writing or editing files inside `changes/`
-
-Do not make any change management decision — starting, pausing, advancing, or archiving a change — without explicit user instruction.
-
-See `AGENT/PROCESS/README.md` for the change process.
+Before starting any work, read and apply `AGENT/README.md` (loaded below).
 
 @{repo_dir}/AGENT/README.md
 """
@@ -78,13 +72,7 @@ def setup_opencode(repo_dir):
     config_dir.mkdir(parents=True, exist_ok=True)
 
     content = f"""\
-Before writing or editing any project file, the current change must be recorded in `changes/open/active.md`. The following are always permitted without an active change:
-- Reading any project file
-- Writing or editing files inside `changes/`
-
-Do not make any change management decision — starting, pausing, advancing, or archiving a change — without explicit user instruction.
-
-See `AGENT/PROCESS/README.md` for the change process.
+Before starting any work, read and apply `AGENT/README.md` (loaded below).
 
 @{repo_dir}/AGENT/README.md
 """

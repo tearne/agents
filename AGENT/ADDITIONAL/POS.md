@@ -17,7 +17,7 @@ POS guidance:
 - Prefer a single Python source file, unless it compromises readability.
 - Make the python file executable and use a `uv` shebang:
     ```sh
-    #!/usr/bin/env -S uv run --script
+    #!/usr/bin/env -S uv run --script --
     # /// script
     # requires-python = "==3.12.*"
     # ///
@@ -45,6 +45,45 @@ POS guidance:
     log = log_path.open("w")
     atexit.register(log.close)
     ```
+
+## Config File Modifications
+
+Scripts that modify user config files must be:
+
+1. **Non-destructive** — never overwrite or delete existing content except where explicitly required; prefer targeted edits
+2. **Idempotent** — repeated runs produce the same result; check whether the intended state already exists before making changes
+3. **Non-conflicting** — before modifying, check whether a conflicting entry already exists (e.g. another assignment to the same variable); if so, leave the file untouched and surface the conflict to the user
+
+Use the following helpers for common cases:
+
+```python
+def append_if_absent(path: Path, block: str) -> None:
+    """Append block to path if not already present."""
+    content = path.read_text() if path.exists() else ""
+    if block in content:
+        return
+    with path.open("a") as f:
+        f.write(("\n" if content and not content.endswith("\n") else "") + block + "\n")
+
+
+def append_or_conflict(path: Path, block: str, conflict_pattern: str) -> None:
+    """Append block to path, unless a conflicting entry already exists.
+
+    conflict_pattern is a regex that matches entries incompatible with block,
+    e.g. r'^export VAR=' for a variable that must only be set once.
+    Raises RuntimeError on conflict.
+    """
+    import re
+    content = path.read_text() if path.exists() else ""
+    if block in content:
+        return  # already present
+    if re.search(conflict_pattern, content, re.MULTILINE):
+        raise RuntimeError(
+            f"Conflicting entry found in {path}. Please resolve manually before re-running."
+        )
+    append_if_absent(path, block)
+```
+
 
 ## Sudo
 
@@ -112,7 +151,7 @@ Use `sudo()` exactly as you would use `subprocess.run()` for shell commands. The
 Tests can be included in the same file using pytest with an inline dependency and self-executing main guard:
 
 ```py
-#!/usr/bin/env -S uv run --script
+#!/usr/bin/env -S uv run --script --
 # /// script
 # requires-python = "==3.12.*"
 # dependencies = ["pytest"]

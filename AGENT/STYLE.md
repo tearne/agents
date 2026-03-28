@@ -28,3 +28,6 @@
 - Comment on business rules, gotchas, trade-offs, and non-obvious decisions
 - No comments that restate what the code shows
 - No outdated comments — they actively mislead
+
+## 6. Markdown
+- Do not insert manual line breaks in prose — write paragraphs as single unbroken lines so text reflows correctly with soft wrap
