@@ -1,18 +1,22 @@
 # Change Process
 
-A change is typically a single file: `changes/open/<change-name>.md`. If the change produces assets, it becomes a folder: `changes/open/<change-name>/change.md`.
+A change is typically a single file: `changes/open/<change-name>.md`. If the change produces assets, it can be converted to a folder: `changes/open/<change-name>/change.md`.
+
+## Structure
 
 ```markdown
 # <Change Name>
 
 ## Intent
-Why this change is needed.  Focus on behaviours and domain language.
+Why this change is needed.  Focus on behaviours and use domain language.
 
 ## Approach
-How it will be implemented.
+How it will be implemented.  May include constraints, example code, technical language.
 
 ## Plan / Log
-**Plan** — ordered task list, agreed upfront, with prefixes such as TEST, ADD, CHANGE, REMOVE.
+Choose between upfront planning or a more iterative log-based appraoch.
+
+**Plan** — ordered task list.
 - [ ] Pending task
 - [x] Completed task
 - [-] Parked task
@@ -25,15 +29,29 @@ How it will be implemented.
 What was done or found.
 ```
 
+## Stage Gates
+
 Sections are added sequentially, only after approval from the user — e.g. "approved", or "yes" after a direct prompt.
 
-## Kickoff
+For each completed section, before asking for approval to move to the next section use the following checklists:
 
-Before the user approves a Plan, agree:
-- **Review cadence** — per-task (pause after each task) or end (implement freely, then review)
-- **Version bump** — major, minor, or patch? *(only if versioning applies)*
+**Intent**
+- Brief — no implementation detail
+- Consistent with `RATIONALE.md` if present
 
-Additional questions may be required depending on which guides are active. Answers should be noted in `## Approach`.
+**Approach**
+- No text repeated from Intent
+- Change document reviewed for consistency and any issues flagged to user
+- Consistent with `RATIONALE.md` if present
+
+**Plan** (if in use)
+- All tasks written to the file before seeking approval
+- Tasks prefixed with a type, e.g. `TEST`, `ADD`, `CHANGE`, `REVIEW`.
+- Tasks suitable for ticking off one by one as completed — never batch-completed at the end
+- Change document reviewed for consistency and any issues flagged to user
+- If using versioning, agree bump size - major, minor, or patch (captured in approach)
+- Review cadence (per-task or at the end) is agreed (captured in approach
+- Additional questions may be required depending on circumstances. Answers should be noted in `## Approach`.
 
 ## Active Change
 
@@ -44,7 +62,7 @@ Additional questions may be required depending on which guides are active. Answe
 **Name**: <change-name>
 ```
 
-Created when work on project assets begins. Removed on archive.
+Create it when work on project assets begins. Delete on archive (see below)
 
 ## Archival
 

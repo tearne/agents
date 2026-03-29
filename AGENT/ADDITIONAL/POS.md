@@ -1,8 +1,8 @@
 # Python Orchestrated Script (POS)
-The POS style helps Python take the place of native shell scripts. It strategically breaks some Python idioms to combine the different strengths of Python and shell scripts, such as favouring subprocess calls for shell commands while using Python control flow.
+The POS style helps Python take the place of native shell scripts for administration or or small applications. It strategically breaks some Python idioms to combine the different strengths of Python and shell scripts, such as favouring subprocess calls for shell commands while using Python control flow.
 
 POS guidance:
-- Prefer `subprocess` for shell commands; use Python for control flow. This makes commands easy to discover and copy-paste into a terminal.
+- Prefer `subprocess` for shell commands; use Python for control flow. This makes commands easy to read and copy-paste elsewhere.
     - Always use `shell=True` with a plain string — this keeps commands terminal-ready and avoids the need for `FileNotFoundError` handling (the shell handles command resolution; use `returncode` or `check=True` for error detection instead).
     - Examples:
         - To download the latest version of the `helix` `deb` for `amd64`:
@@ -22,15 +22,15 @@ POS guidance:
     # requires-python = "==3.12.*"
     # ///
     ```
-- Scripts should carry a version constant and expose it via `--version`:
+- Scripts should carry a version constant and expose it via `--version` using `argparse`:
     ```py
     VERSION = "1.0.0"
     ```
     ```py
     parser.add_argument("--version", action="version", version=f"%(prog)s {VERSION}")
     ```
-- Key functions at the top of the file (easy to comment out or jump to); utility functions at the bottom.
-- Use a "main guard" at the bottom of the file. Include the `uv`/venv check here — it is an invocation-mode concern, not business logic — before calling `main()`:
+- Key functions go at the top of the file; utility functions at the bottom.
+- Use a "main guard" at the bottom of the file. Include a venv check here before calling `main()`:
     ```py
     if __name__ == "__main__":
         if not os.environ.get("VIRTUAL_ENV"):
@@ -39,7 +39,7 @@ POS guidance:
         main()
     ```
 - Prefer built-in libraries to maximise future compatibility. Suggested (when relevant): `argparse`, `atexit`, `getpass`, `os`, `pathlib`, `shutil`, `subprocess`, `sys`, `time`. Pre-approved external: `rich`. Other third-party libraries may be proposed if they are mainstream or would significantly enhance readability.
-- When a `Path` object is already in hand, prefer `path.open(mode)` over `open(path, mode)` to keep pathlib usage consistent and avoid mixing idioms within the same file.
+- When a `Path` object is already in hand, prefer `path.open(mode)` over `open(path, mode)`.
 - Use `atexit` for cleanup of resources that must be released on normal exit and on `sys.exit()` (e.g. a log file opened at startup). Note: `atexit` handlers do not run on `os._exit()` or unhandled signals such as `SIGKILL`.
     ```py
     log = log_path.open("w")
@@ -54,7 +54,7 @@ Scripts that modify user config files must be:
 2. **Idempotent** — repeated runs produce the same result; check whether the intended state already exists before making changes
 3. **Non-conflicting** — before modifying, check whether a conflicting entry already exists (e.g. another assignment to the same variable); if so, leave the file untouched and surface the conflict to the user
 
-Use the following helpers for common cases:
+Recommended helpers for common cases:
 
 ```python
 def append_if_absent(path: Path, block: str) -> None:
@@ -87,9 +87,9 @@ def append_or_conflict(path: Path, block: str, conflict_pattern: str) -> None:
 
 ## Sudo
 
-Scripts that require elevated privileges for specific commands should ask for the password once upfront — after argument parsing, before the work begins — rather than running the whole script as root or prompting mid-execution.
+Scripts that require elevated privileges for specific commands should ask for the password once upfront, before the work begins — rather than running the whole script as root or prompting mid-execution.
 
-Call `init_sudo()` at the start of the privileged section. It skips the prompt if already root or if passwordless sudo is available. Otherwise it prompts once, retries up to 3 times on failure, and caches the result. All privileged `subprocess` calls then use the `sudo()` helper.
+Below, `init_sudo()` skips the prompt if already root or if passwordless sudo is available. Otherwise it prompts once, retries up to 3 times on failure, and caches the result. All privileged `subprocess` calls then use the `sudo()` helper.
 
 ```python
 import getpass
