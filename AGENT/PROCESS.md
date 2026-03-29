@@ -54,6 +54,11 @@ For each completed section, before asking for approval to move to the next secti
 - Review cadence (per-task or at the end) must be agreed and captured in approach
 - Additional questions may be required depending on circumstances. Answers should be noted in `## Approach`.
 
+**Conclusion**
+- `## Conclusion` written to the change file
+- Log entries retrofitted into Intent, Approach, and Plan as appropriate
+- Change document reviewed to remove duplication across sections
+
 ## Active Change
 
 `changes/open/active.md` is a lock file. Its presence blocks a second change from touching project assets outside the `changes/` folder.
@@ -66,6 +71,8 @@ For each completed section, before asking for approval to move to the next secti
 Create it when work on project assets begins. Delete on archive (see below)
 
 If asked to create a new change, proposal, or note while a change is active, pause the active change and capture the new proposal's Intent in a new change file — writing into `changes/` is always permitted regardless of active change state. After capturing the Intent, offer to return to the interrupted change.
+
+If the user requests further modifications during an active change, capture them in a `## Log` section of the change document (add the section if not present). Before archival, retrofit log entries back into the appropriate sections — Intent, Approach, and Plan — so the change document accurately reflects what was done.
 
 ## Archival
 
