@@ -46,12 +46,12 @@ For each completed section, before asking for approval to move to the next secti
 
 **Plan** (if in use)
 - All tasks written to the file before seeking approval
-- Tasks prefixed with a type, e.g. `TEST`, `ADD`, `CHANGE`, `REVIEW`.
+- Tasks prefixed with a type, e.g. `ADD TEST`, `UPDATE IMPL`, `REVIEW`.
 - Tasks suitable for ticking off one by one as completed — never batch-completed at the end
 - Change document reviewed for consistency and any issues flagged to user
 - Consider whether any SPEC update tasks are required
 - If using versioning, agree bump size - major, minor, or patch (captured in approach)
-- Review cadence (per-task or at the end) is agreed (captured in approach
+- Review cadence (per-task or at the end) must be agreed and captured in approach
 - Additional questions may be required depending on circumstances. Answers should be noted in `## Approach`.
 
 ## Active Change
