@@ -20,6 +20,8 @@ All changes begin in `changes/open/`. See `PROCESS.md` for full detail.
 
 ## Specifications
 
+Before writing a `SPEC.md`, consider creating a `RATIONALE.md` at the project root — optional but recommended. It captures the problem being solved, why existing solutions fall short, and the key decisions that shape the solution. Its purpose is to orient all future changes.
+
 Project specifications live in `SPEC.md` files (or a `SPEC/` directory when a single file would be too large):
 - The **root** `SPEC.md` covers the project as a whole (structure, shared requirements, integration testing)
 - Directory `SPEC.md` files are scoped to components in that directory and below, inheriting project-wide requirements unless explicitly overridden
