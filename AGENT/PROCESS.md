@@ -31,7 +31,7 @@ What was done or found.
 
 ## Stage Gates
 
-Sections are added sequentially, only after approval from the user — e.g. "approved", or "yes" after a direct prompt.
+Sections are added sequentially, only after approval from the user — e.g. "approved", or "yes" after a direct prompt. Each section must be written to the change file before approval is sought — do not draft in chat and write only after approval.
 
 For each completed section, before asking for approval to move to the next section use the following checklists:
 
@@ -64,6 +64,8 @@ For each completed section, before asking for approval to move to the next secti
 ```
 
 Create it when work on project assets begins. Delete on archive (see below)
+
+If asked to create a new change, proposal, or note while a change is active, pause the active change and capture the new proposal's Intent in a new change file — writing into `changes/` is always permitted regardless of active change state. After capturing the Intent, offer to return to the interrupted change.
 
 ## Archival
 
